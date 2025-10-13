@@ -20,18 +20,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-
-    Route::controller(DepartmentController::class)->group(function () {
-        Route::get('/departments', 'index')->name('departments');
-        Route::post('/departments/store', 'store')->name('departments.store');
-        Route::put('/departments/{department}', 'update')->name('departments.update');
-        Route::delete('/departments/{department}', 'destroy')->name('departments.delete');
-    });
-
     Route::resource('departments', DepartmentController::class);
     Route::resource('asset-categories', AssetCategoryController::class);
 
-    Route::controller(AssetsController::class)->group(function () {
-        Route::get('/asset', 'index')->name('assets.index');
-    });
+    // Route::controller(AssetsController::class)->group(function () {
+    //     Route::get('/asset', 'index')->name('assets.index');
+    //     Route::get('/asset/create', 'create')->name('assets.create');
+    // });
+
+    Route::resource('asset', AssetsController::class);
 });

@@ -46,7 +46,7 @@
                                     <summary>Assets</summary>
                                     <ul class="bg-primary rounded-t-none p-2 ">
                                         <li><a class="{{ request()->routeIs('assets.index') ? 'bg-secondary' : '' }}"
-                                                href={{ route('assets.index') }}>Assets</a></li>
+                                                href={{ route('asset.index') }}>Assets</a></li>
                                         <li>
                                             <a class="{{ request()->routeIs('asset-categories.index') ? 'bg-secondary' : '' }}"
                                                 href={{ route('asset-categories.index') }}>

@@ -11,7 +11,7 @@
                 <input class="btn btn-secondary text-white" type="radio" name="frameworks" aria-label="Vue" />
                 <input class="btn btn-secondary text-white" type="radio" name="frameworks" aria-label="React" />
             </form>
-            <a href={{ route('departments.create') }} class="btn btn-primary">Add Department</a>
+            <a href={{ route('asset.create') }} class="btn btn-primary">Add Assets</a>
         </div>
     </div>
     <div class="overflow-x-auto">
