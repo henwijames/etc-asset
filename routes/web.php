@@ -1,11 +1,30 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('login');
+Route::controller(SessionController::class)->group(function () {
+    Route::get("/", 'create')->name('login');
+    Route::post("/login", 'store');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+
+    Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
+
+
+    Route::controller(DepartmentController::class)->group(function () {
+        Route::get('/departments', 'index')->name('departments');
+        Route::post('/departments/store', 'store')->name('departments.store');
+        Route::put('/departments/{department}', 'update')->name('departments.update');
+        Route::delete('/departments/{department}', 'destroy')->name('departments.delete');
+    });
+
+    Route::resource('departments', DepartmentController::class);
+});

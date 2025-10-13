@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Management System</title>
+    <title>@yield('title', 'Erick Trading Co. Asset Management System')</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -47,11 +47,18 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="btn btn-sm btn-secondary text-white">
-                                    <i data-lucide="log-out"class="w-4"></i>
-                                    Logout
+                                <a href={{ route('departments.index') }}
+                                    class="{{ request()->routeIs('departments*') ? 'bg-secondary' : '' }}">
+                                    Departments
                                 </a>
                             </li>
+                            <form action={{ route('logout') }} method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-secondary text-white">
+                                    <i data-lucide="log-out"class="w-4"></i>
+                                    Logout
+                                </button>
+                            </form>
                         </ul>
                     </div>
 
@@ -72,8 +79,8 @@
                         Dashboard
                     </a></a></li>
                 <li><a>Sidebar Item 2</a></li>
-                <li class=" mt-auto">
-                    <a href="">Logout</a>
+                <li class="mt-auto">
+                    <a href="" class="flex gap-2 items-center"><i data-lucide="log-out"class="w-4"></i>Logout</a>
                 </li>
             </ul>
         </div>
@@ -83,6 +90,51 @@
     <main class="flex-1 p-6 container mx-auto">
         @yield('content')
     </main>
+
+    @if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Toastify({
+                    text: "{{ session('success') }}",
+                    duration: 3000,
+                    gravity: "bottom",
+                    position: "right",
+                    backgroundColor: "#00C111",
+                }).showToast();
+            })
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Toastify({
+                    text: "{{ session('error') }}",
+                    duration: 3000,
+                    gravity: "bottom",
+                    position: "right",
+                    style.background: "#C10011",
+                }).showToast();
+            })
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                document.addEventListener("DOMContentLoaded", function() {
+                    Toastify({
+                        text: "{{ $error }}",
+                        duration: 4000,
+                        gravity: "bottom",
+                        position: "right",
+                        backgroundColor: "#C10011",
+                    }).showToast();
+                })
+            @endforeach
+        </script>
+    @endif
+
 
 </body>
 
