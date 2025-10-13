@@ -42,9 +42,18 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="{{ request()->routeIs('') ? 'bg-secondary' : '' }}">
-                                    Assets
-                                </a>
+                                <details>
+                                    <summary>Assets</summary>
+                                    <ul class="bg-primary rounded-t-none p-2 ">
+                                        <li><a>Assets</a></li>
+                                        <li>
+                                            <a class="{{ request()->routeIs('asset-categories.index') ? 'bg-secondary' : '' }}"
+                                                href={{ route('asset-categories.index') }}>
+                                                Categories
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </details>
                             </li>
                             <li>
                                 <a href={{ route('departments.index') }}
@@ -77,8 +86,22 @@
                 <li><a href={{ route('dashboard') }}
                         class="{{ request()->routeIs('dashboard') ? 'bg-secondary' : '' }}">
                         Dashboard
-                    </a></a></li>
-                <li><a>Sidebar Item 2</a></li>
+                    </a></li>
+                <li>
+                    <details>
+                        <summary>Assets</summary>
+                        <ul class="rounded-t-none p-2">
+                            <li><a>Assets</a></li>
+                            <li><a>Categories</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <a href={{ route('departments.index') }}
+                        class="{{ request()->routeIs('departments*') ? 'bg-secondary' : '' }}">
+                        Departments
+                    </a>
+                </li>
                 <li class="mt-auto">
                     <a href="" class="flex gap-2 items-center"><i data-lucide="log-out"class="w-4"></i>Logout</a>
                 </li>
