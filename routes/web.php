@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssetCategoryController;
+use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('departments', DepartmentController::class);
     Route::resource('asset-categories', AssetCategoryController::class);
+
+    Route::controller(AssetsController::class)->group(function () {
+        Route::get('/asset', 'index')->name('assets.index');
+    });
 });
