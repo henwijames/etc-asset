@@ -5,15 +5,21 @@
         <h1 class="text-2xl font-bold mb-4">Assets</h1>
         <a href={{ route('asset.create') }} class="btn btn-primary">Add Assets</a>
     </div>
-    <form class="filter filter-sm text-white mb-2">
-        <!-- Clear filter button -->
-        <input class="btn btn-secondary btn-square text-white" type="reset" value="×" />
 
-        @foreach ($categories as $category)
-            <input class="btn btn-secondary text-white" type="radio" name="category" aria-label="{{ $category->name }}"
-                value="{{ $category->id }}" />
-        @endforeach
-    </form>
+    @if (isset($assets) && $assets->count())
+        <form class="filter filter-sm text-white mb-2">
+            <!-- Clear filter button -->
+            <input class="btn btn-secondary btn-square text-white" type="reset" value="×" />
+
+            @foreach ($categories as $category)
+                <input class="btn btn-secondary text-white" type="radio" name="category" aria-label="{{ $category->name }}"
+                    value="{{ $category->id }}" />
+            @endforeach
+        </form>
+    @endif
+
+
+
     <div class="overflow-x-auto">
         <table class="table table-zebra">
             <!-- head -->
@@ -53,9 +59,13 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No assets found</td>
+                        <td colspan="6" class="text-center">No assets found</td>
                     </tr>
                 @endforelse
+
+                <tr class="no-assets hidden">
+                    <td colspan="6" class="text-center">No assets found</td>
+                </tr>
 
 
             </tbody>
@@ -79,23 +89,34 @@
         const filterRadios = document.querySelectorAll('form.filter input[type="radio"]');
         const clearButton = document.querySelector('form.filter input[type="reset"]');
         const assetRows = document.querySelectorAll('.asset-row');
+        const noAssetsRow = document.querySelector('.no-assets')
 
         filterRadios.forEach(radio => {
             radio.addEventListener('change', () => {
                 const selectedCategory = radio.value;
+                let anyVisible = false;
+
                 assetRows.forEach(row => {
                     console.log(row.dataset.category)
                     if (row.dataset.category === selectedCategory) {
                         row.style.display = '';
+                        anyVisible = true;
                     } else {
                         row.style.display = 'none';
                     }
                 });
+
+                if (anyVisible) {
+                    noAssetsRow.classList.add('hidden')
+                } else {
+                    noAssetsRow.classList.remove('hidden')
+                }
             });
         });
 
         clearButton.addEventListener('click', () => {
             assetRows.forEach(row => row.style.display = '');
+            noAssetsRow.classList.add('hidden')
         });
 
         function openDeleteModal(id) {
