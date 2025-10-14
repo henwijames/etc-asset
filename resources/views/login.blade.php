@@ -10,18 +10,13 @@
             <form action='/login' method="POST" class="space-y-4">
                 @csrf
                 <div>
-
-                    <x-form-input name="email" type="email" label="Email" placeholder="ericktrco@etc.com" />
-                    @error('email')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                    <x-form-input name="email" :value="old('email')" type="email" label="Email"
+                        placeholder="ericktrco@etc.com" />
+                    <x-input-error name="email" />
                 </div>
                 <div>
-
                     <x-form-input name="password" type="password" label="Password" placeholder="Password" />
-                    @error('password')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                    <x-input-error name="password" />
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary w-full">Sign in</button>
