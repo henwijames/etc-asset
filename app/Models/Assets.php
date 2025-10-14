@@ -10,7 +10,8 @@ class Assets extends Model
         'asset_name',
         'category_id',
         'serial_number',
-        'status'
+        'status',
+        'quantity'
     ];
 
     public function category()

@@ -8,10 +8,21 @@ use Illuminate\Http\Request;
 
 class AssetsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view("assets.index");
+        $categories = AssetCategory::all();
+
+        $query = Assets::query()->with('category');
+
+        if ($request->has('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $assets = $query->get();
+
+        return view('assets.index', compact('assets', 'categories'));
     }
+
 
     public function create()
     {
@@ -24,7 +35,8 @@ class AssetsController extends Controller
         $validated = $request->validate([
             "asset_name" => 'required',
             "serial_number" => 'required',
-            "category_id" => 'required'
+            "category_id" => 'required',
+            'quantity' => 'numeric|required'
         ]);
 
         Assets::create($validated);
@@ -32,9 +44,29 @@ class AssetsController extends Controller
         return redirect()->route('asset.index')->with('success', 'Asset created successfully');
     }
 
-    public function edit(Assets $assets)
+    public function edit(Assets $asset)
     {
         $categories = AssetCategory::all();
-        return view('asset.edit', compact('assets', 'categories'));
+        return view('assets.edit', compact('asset', 'categories'));
+    }
+
+    public function update(Request $request, Assets $asset)
+    {
+        $validated = $request->validate([
+            "asset_name" => 'required',
+            "serial_number" => 'required',
+            "category_id" => 'required',
+            'quantity' => 'numeric|required'
+        ]);
+
+        $asset->update($validated);
+
+        return redirect()->route('asset.index')->with('success', 'Asset updated successfully');
+    }
+
+    public function destroy(Assets $asset)
+    {
+        $asset->delete();
+        return redirect()->back()->with('success', 'Asset deleted successfully');
     }
 }

@@ -20,6 +20,9 @@
                 <x-form-input label="Serial Number" name="serial_number" placeholder="9CP309366L" />
             </div>
             <div>
+                <x-form-input type="number" label="Quantity" name="quantity" placeholder="50" />
+            </div>
+            <div>
 
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Categories</legend>
