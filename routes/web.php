@@ -11,9 +11,13 @@ use App\Models\BorrowTransaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(SessionController::class)->group(function () {
-    Route::get("/", 'create')->name('login');
-    Route::post("/login", 'store');
+
+
+Route::middleware('guest')->group(function () {
+    Route::controller(SessionController::class)->group(function () {
+        Route::get("/", 'create')->name('login');
+        Route::post("/login", 'store');
+    });
 });
 
 
