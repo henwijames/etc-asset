@@ -6,6 +6,7 @@
         'borrowed' => 'badge-secondary',
         'damaged' => 'badge-accent',
         'lost' => 'badge-error',
+        'returned' => 'badge-success',
     ];
 @endphp
 

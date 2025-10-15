@@ -18,4 +18,9 @@ class Assets extends Model
     {
         return $this->belongsTo(AssetCategory::class);
     }
+
+    public function borrow()
+    {
+        return $this->hasMany(BorrowTransaction::class);
+    }
 }

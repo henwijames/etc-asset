@@ -57,6 +57,12 @@
                                 </details>
                             </li>
                             <li>
+                                <a href={{ route('borrow.index') }}
+                                    class="{{ request()->routeIs('borrow*') ? 'bg-secondary' : '' }}">
+                                    Borrow
+                                </a>
+                            </li>
+                            <li>
                                 <a href={{ route('departments.index') }}
                                     class="{{ request()->routeIs('departments*') ? 'bg-secondary' : '' }}">
                                     Departments

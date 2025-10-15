@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function borrow()
+    {
+        return $this->hasMany(BorrowTransaction::class);
+    }
 }

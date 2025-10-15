@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssetCategoryController;
 use App\Http\Controllers\AssetsController;
+use App\Http\Controllers\BorrowTransactionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,5 @@ Route::middleware('auth')->group(function () {
     // });
 
     Route::resource('asset', AssetsController::class);
+    Route::resource('borrow', BorrowTransactionController::class);
 });
