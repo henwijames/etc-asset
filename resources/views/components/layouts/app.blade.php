@@ -28,10 +28,10 @@
                             </svg>
                         </label>
                     </div>
-                    <div class="mx-2 px-2 lg:flex-none flex-1 flex items-center gap-2">
+                    <a href="/dashboard" class="mx-2 px-2 lg:flex-none flex-1 flex items-center gap-2">
                         <img src={{ asset('assets/etclogo.jpeg') }} alt="etclogo" width="20">
                         Erick Trading Co.
-                    </div>
+                    </a>
                     <div class="hidden flex-none lg:block">
                         <ul class="menu menu-horizontal gap-2">
                             <!-- Navbar menu content here -->
